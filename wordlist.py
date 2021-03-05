@@ -32,10 +32,10 @@ class WordList:
             >>> wl = WordList("test_dictionary.txt")
             >>> w_cat = "CAT"
             >>> w_rat = "RAT"
-            >>> w_cat in wl.words
+            >>> wl.check_word(w_cat)
             True
-            >>> w_rat not in wl.words
-            True
+            >>> wl.check_word(w_rat)
+            False
         
         """
 

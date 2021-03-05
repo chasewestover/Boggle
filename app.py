@@ -3,6 +3,7 @@ from uuid import uuid4
 
 from boggle import BoggleGame
 
+
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "this-is-secret"
 
@@ -25,5 +26,24 @@ def new_game():
     game_id = str(uuid4())
     game = BoggleGame()
     games[game_id] = game
+    print(games, "games")
+    print(game.board)
+    # print(type(jsonify({"gameId": str(game_id), "board": str(game.board)})))
+    return jsonify({"gameId": game_id, "board": game.board})
+   
 
-    return {"gameId": "need-real-id", "board": "need-real-board"}
+@app.route("/api/score-word", methods=["POST"])
+def score_word():
+    """Check to see if word exists in word list and on the board"""
+    gameId = request.json["gameId"]
+    word = request.json["word"]
+    game = games[gameId]
+    if game.check_word_on_board(word) and game.is_word_in_word_list(word):
+        return jsonify({"result": "ok"})
+    elif game.check_word_on_board(word):
+        return jsonify({"result": "not-word"})
+    else:
+        return jsonify({"result": "not-on-board"})
+
+# gameId: "f65d2837-eacd-4acd-9b2e-9e9d21839790"
+# hate
