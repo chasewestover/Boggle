@@ -22,13 +22,9 @@ def homepage():
 def new_game():
     """Start a new game and return JSON: {game_id, board}."""
 
-    # get a unique id for the board we're creating
     game_id = str(uuid4())
     game = BoggleGame()
     games[game_id] = game
-    print(games, "games")
-    print(game.board)
-    # print(type(jsonify({"gameId": str(game_id), "board": str(game.board)})))
     return jsonify({"gameId": game_id, "board": game.board})
    
 
@@ -36,7 +32,7 @@ def new_game():
 def score_word():
     """Check to see if word exists in word list and on the board"""
     gameId = request.json["gameId"]
-    word = request.json["word"]
+    word = request.json["word"].upper()
     game = games[gameId]
     if game.check_word_on_board(word) and game.is_word_in_word_list(word):
         return jsonify({"result": "ok"})
@@ -44,6 +40,3 @@ def score_word():
         return jsonify({"result": "not-word"})
     else:
         return jsonify({"result": "not-on-board"})
-
-# gameId: "f65d2837-eacd-4acd-9b2e-9e9d21839790"
-# hate
