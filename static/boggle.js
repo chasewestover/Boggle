@@ -23,19 +23,20 @@ async function start() {
 /** Display board */
 
 function displayBoard(board) {
-  // console.log("hello");
   $table.empty();
-  // loop over board and create the DOM tr/td structure
-  $table.append(`<tbody id="table-body">`)
+  const body = $('<tbody>');
   for (let i = 0; i < board.length; i++) {
-    $("#table-body").append(`<tr id=${i}>`);
-    for (let j = 0; j < board[i].length; j++) {
-      $(`#${i}`).append(`<td>${board[i][j]}</td>`);
+    const row = $('<tr>');
+    for (let j = 0; j < board.length; j++) {
+      row.append( $('<td>').text(board[i][j]) );
     }
+    body.append(row)
   }
+  $table.append(body)
 }
 
 function displayResult(word, wordResult) {
+  $wordInput.val('')
   if (wordResult.result === "ok") {
     $playedWords.append(`<li>${word}</li>`);
     $message.text("");
@@ -43,6 +44,7 @@ function displayResult(word, wordResult) {
     $message.text(`This is ${wordResult.result}`);
   }
 }
+
 start();
 $form.on("submit", async function (e) {
   e.preventDefault();

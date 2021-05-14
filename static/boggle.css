@@ -18,13 +18,12 @@ main {
     /*font-family: monospace;*/
     font-weight: bold;
     font-size: 150%;
-    box-shadow: #000033 5px 5px 15px 1px;
 }
 
 .board td {
     text-align: center;
-    width: 1.5em;
-    height: 1.5em;
+    width: 2em;
+    height: 2em;
     background-color: white;
     border: solid 1px black;
     border-radius: 5px;
