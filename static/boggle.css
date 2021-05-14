@@ -22,8 +22,8 @@ main {
 
 .board td {
     text-align: center;
-    width: 2em;
-    height: 2em;
+    width: 2.5em;
+    height: 2.5em;
     background-color: white;
     border: solid 1px black;
     border-radius: 5px;
